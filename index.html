@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FRANCO Specialized Design Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;font-family:'Cairo',sans-serif;background:radial-gradient(circle at 50% 20%,rgba(218,170,69,.14),transparent 34%),linear-gradient(145deg,#050505,#101010 55%,#050505);color:#fff}
+button,input,select,textarea{font-family:'Cairo',sans-serif}
+.page{min-height:100vh;display:none;align-items:center;justify-content:center;padding:24px}.page.active{display:flex}
+.hero{width:min(1100px,92vw);min-height:78vh;border:1px solid rgba(214,173,69,.22);border-radius:36px;background:rgba(255,255,255,.035);box-shadow:0 40px 120px rgba(0,0,0,.55),inset 0 0 80px rgba(214,173,69,.05);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;text-align:center;padding:40px}
+.english{font-size:clamp(42px,8vw,110px);line-height:1.02;font-weight:900;letter-spacing:-2px;text-transform:uppercase;color:#f6d37d;text-shadow:0 0 22px rgba(214,173,69,.35),0 12px 35px rgba(0,0,0,.45)}
+.english span{display:block;font-weight:300;letter-spacing:8px;color:#fff;font-size:.34em;margin-top:14px;text-transform:uppercase}
+.line{width:140px;height:2px;background:linear-gradient(90deg,transparent,#d6ad45,transparent);margin:32px auto 0}
+.mainBtn,.submitBtn{margin-top:34px;display:inline-flex;align-items:center;justify-content:center;min-width:190px;padding:14px 28px;border-radius:999px;border:0;background:linear-gradient(135deg,#f6d37d,#d6ad45);color:#111;font-size:22px;font-weight:900;box-shadow:0 18px 45px rgba(214,173,69,.24);cursor:pointer}
+.authWrap{width:min(1040px,94vw);display:grid;grid-template-columns:1fr 430px;border:1px solid rgba(214,173,69,.22);border-radius:34px;overflow:hidden;background:rgba(255,255,255,.035);box-shadow:0 40px 120px rgba(0,0,0,.55)}
+.authInfo{padding:46px;background:radial-gradient(circle at 35% 30%,rgba(214,173,69,.15),transparent 34%),linear-gradient(145deg,#0c0c0c,#050505);display:flex;flex-direction:column;justify-content:center}
+.authInfo h2{font-size:clamp(34px,5vw,62px);line-height:1.15;color:#f6d37d;margin-bottom:18px}
+.authInfo p{color:#bdbdbd;line-height:1.9;font-size:17px}
+.authCard{padding:36px;background:#0d0d0d;border-right:1px solid rgba(214,173,69,.16)}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px;padding:6px;background:#080808;border:1px solid #282114;border-radius:18px}
+.tab{border:0;border-radius:13px;padding:12px;background:transparent;color:#aaa;font-weight:800;cursor:pointer}.tab.active{background:linear-gradient(135deg,#f6d37d,#d6ad45);color:#111}
+.formTitle{font-size:26px;font-weight:900;margin-bottom:6px}.formSub{color:#999;font-size:14px;margin-bottom:22px}
+.googleBtn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:13px;border-radius:15px;border:1px solid #333;background:#fff;color:#111;font-weight:900;cursor:pointer}
+.divider{display:flex;align-items:center;gap:12px;color:#777;font-size:13px;margin:22px 0}.divider:before,.divider:after{content:"";flex:1;height:1px;background:#2a2a2a}
+.field{margin-bottom:14px}.field label{display:block;color:#d5d5d5;font-size:13px;margin-bottom:7px}.field input{width:100%;padding:13px 14px;border-radius:14px;border:1px solid #2d2d2d;background:#080808;color:#fff;outline:none}
+.backBtn{margin-top:12px;width:100%;border:1px solid #333;border-radius:15px;padding:12px;background:#111;color:#fff;cursor:pointer}.hidden{display:none}
+.nav{margin-top:10px;display:grid;gap:10px}.nav div{padding:13px 14px;border:1px solid #242016;border-radius:16px;background:#101010;color:#d8d0c2}.nav div.active{border-color:#d6ad45;background:rgba(216,173,69,.1);color:#fff}
+
+.studioWrap{width:min(1360px,98vw);display:grid;grid-template-columns:310px 1fr 430px;gap:18px;align-items:start}
+.panel{background:#0d0d0d;border:1px solid rgba(214,173,69,.22);border-radius:28px;padding:22px;box-shadow:0 35px 100px rgba(0,0,0,.48)}
+.panel h2{color:#f6d37d;font-size:30px;margin-bottom:8px}.panel p{color:#aaa;line-height:1.7;font-size:14px}
+.categoryGrid{display:grid;gap:10px;margin-top:16px;max-height:72vh;overflow:auto;padding-left:4px}
+.catBtn{border:1px solid #302819;background:#080808;color:#ddd;border-radius:16px;padding:13px;cursor:pointer;text-align:right;font-weight:800}
+.catBtn.active{background:linear-gradient(135deg,#f6d37d,#d6ad45);color:#111;border-color:#d6ad45}
+.promptArea{width:100%;min-height:110px;border-radius:18px;border:1px solid #302819;background:#070707;color:#fff;padding:15px;resize:vertical;outline:none;line-height:1.8;margin-top:10px}
+.customSizeBox{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
+.customSizeBox input,.customSizeBox select{width:100%;padding:12px;border-radius:14px;border:1px solid #302819;background:#080808;color:#fff;outline:none}
+.optionsGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+.optionField label{display:block;color:#ddd;font-size:13px;margin-bottom:7px}.optionField select,.optionField input{width:100%;padding:12px;border-radius:14px;border:1px solid #302819;background:#080808;color:#fff;outline:none}
+.outputMode{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.modeBtn{border:1px solid #302819;background:#080808;color:#ddd;border-radius:16px;padding:14px;cursor:pointer;font-weight:900}.modeBtn.active{background:linear-gradient(135deg,#f6d37d,#d6ad45);color:#111;border-color:#d6ad45}
+.actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px}.actions button{margin-top:0;min-width:auto;font-size:15px;border-radius:15px}
+.resultBox{white-space:pre-wrap;line-height:1.75;color:#eee;background:#070707;border:1px solid #302819;border-radius:20px;padding:16px;min-height:360px;font-size:13px}
+.ownerTag{display:inline-block;color:#111;background:linear-gradient(135deg,#f6d37d,#d6ad45);padding:8px 12px;border-radius:999px;font-weight:900;font-size:12px;margin-bottom:8px}
+.metaGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.meta{background:#080808;border:1px solid #302819;border-radius:16px;padding:13px}.meta small{display:block;color:#888;margin-bottom:4px}.meta b{color:#fff}
+.generatedPreview{display:none;margin-top:16px;border:1px solid #302819;border-radius:22px;overflow:hidden;background:#070707}.generatedPreview.active{display:block}
+.generatedCanvas{width:100%;min-height:310px;background:linear-gradient(145deg,#101010,#050505);display:flex;align-items:center;justify-content:center;padding:22px}.designMock{width:100%;min-height:260px;border:2px solid #d6ad45;border-radius:22px;background:radial-gradient(circle at 50% 25%,rgba(214,173,69,.22),transparent 30%),linear-gradient(145deg,#121212,#050505);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}.designMock h3{color:#f6d37d;font-size:30px;margin-bottom:12px}.designMock p{color:#ddd;font-size:15px;line-height:1.7}
+.fileMock{display:none;margin-top:16px;background:#070707;border:1px solid #302819;border-radius:22px;padding:18px}.fileMock.active{display:block}.fileMock h3{color:#f6d37d;margin-bottom:8px}.fileMock ul{padding-right:22px;color:#ddd;line-height:1.9}
+.downloadPanel{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.72);z-index:99;padding:20px}.downloadPanel.active{display:flex}
+.downloadBox{width:min(560px,94vw);background:#0d0d0d;border:1px solid rgba(214,173,69,.28);border-radius:28px;padding:26px;box-shadow:0 40px 120px rgba(0,0,0,.65)}
+.downloadBox h2{color:#f6d37d;margin-bottom:8px;font-size:28px}.downloadBox p{color:#aaa;line-height:1.7;margin-bottom:18px}.downloadChoices{display:grid;grid-template-columns:1fr 1fr;gap:12px}.downloadChoice{border:1px solid #302819;background:#080808;color:#fff;border-radius:20px;padding:20px;cursor:pointer;text-align:right}.downloadChoice b{display:block;color:#f6d37d;font-size:18px;margin-bottom:6px}.downloadChoice span{color:#aaa;font-size:13px;line-height:1.6}
+@media(max-width:1150px){.studioWrap{grid-template-columns:1fr}.categoryGrid{max-height:none}.authWrap{grid-template-columns:1fr}.optionsGrid,.actions,.customSizeBox{grid-template-columns:1fr}.authCard{border-right:0;border-top:1px solid rgba(214,173,69,.16)}}
+
+.pricingWrap{
+  width:min(1280px,97vw);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.pricingHeader{
+  background:#0d0d0d;
+  border:1px solid rgba(214,173,69,.22);
+  border-radius:28px;
+  padding:26px;
+  box-shadow:0 35px 100px rgba(0,0,0,.48);
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:20px;
+}
+.pricingHeader h2{
+  color:#f6d37d;
+  font-size:40px;
+  margin-bottom:8px;
+}
+.pricingHeader p{
+  color:#aaa;
+  line-height:1.7;
+}
+.pricingGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.priceCard{
+  position:relative;
+  background:#0d0d0d;
+  border:1px solid rgba(214,173,69,.22);
+  border-radius:28px;
+  padding:22px;
+  box-shadow:0 25px 80px rgba(0,0,0,.38);
+}
+.priceCard.featured{
+  border-color:#d6ad45;
+  background:linear-gradient(180deg,rgba(214,173,69,.11),#0d0d0d 45%);
+}
+.planName{
+  font-size:26px;
+  font-weight:900;
+  color:#f6d37d;
+}
+.planPoints{
+  color:#ddd;
+  margin-top:6px;
+  font-weight:700;
+}
+.priceLine{
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+  margin:18px 0;
+}
+.currentPrice{
+  font-size:38px;
+  font-weight:900;
+  color:#fff;
+}
+.currency{
+  color:#f6d37d;
+  font-size:16px;
+  margin-bottom:8px;
+}
+.oldPrice{
+  color:#777;
+  text-decoration:line-through;
+  margin-bottom:8px;
+}
+.saveBadge{
+  position:absolute;
+  top:18px;
+  left:18px;
+  background:linear-gradient(135deg,#f6d37d,#d6ad45);
+  color:#111;
+  border-radius:999px;
+  padding:7px 11px;
+  font-size:12px;
+  font-weight:900;
+}
+.features{
+  margin-top:16px;
+  padding-right:20px;
+  color:#cfcfcf;
+  line-height:1.9;
+  font-size:14px;
+}
+.chooseBtn{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  padding:13px;
+  margin-top:18px;
+  background:linear-gradient(135deg,#f6d37d,#d6ad45);
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+}
+.priceNote{
+  background:#080808;
+  border:1px solid #302819;
+  border-radius:20px;
+  padding:16px;
+  color:#aaa;
+  line-height:1.7;
+}
+@media(max-width:1050px){.pricingGrid{grid-template-columns:repeat(2,1fr)}.pricingHeader{flex-direction:column;align-items:flex-start}}
+@media(max-width:700px){.pricingGrid{grid-template-columns:1fr}.pricingHeader h2{font-size:32px}}
+
+</style>
+</head>
+<body>
+<main id="homePage" class="page active">
+  <section class="hero"><div><h1 class="english">Franco Design<span>studio</span></h1><div class="line"></div><button class="mainBtn" onclick="showAuth()">أنشئ الآن</button></div></section>
+</main>
+
+<main id="authPage" class="page">
+  <section class="authWrap">
+    <div class="authInfo"><h2>ابدأ التصميم الآن</h2><p>كل قسم له أدواته واختياراته المتخصصة بنسبة 100% حسب مجاله.</p></div>
+    <div class="authCard">
+      <div class="tabs"><button id="loginTab" class="tab active" onclick="switchMode('login')">تسجيل الدخول</button><button id="signupTab" class="tab" onclick="switchMode('signup')">إنشاء حساب</button></div>
+      <div class="formTitle" id="formTitle">تسجيل الدخول</div><div class="formSub" id="formSub">ادخل بياناتك أو استخدم حساب Google.</div>
+      <button class="googleBtn" onclick="googleLogin()">G الدخول عبر Google</button><div class="divider">أو</div>
+      <div class="field hidden" id="nameField"><label>الاسم</label><input type="text" placeholder="اكتب اسمك"></div>
+      <div class="field"><label>البريد الإلكتروني</label><input id="emailInput" type="email" placeholder="example@email.com"></div>
+      <div class="field"><label>كلمة المرور</label><input id="passwordInput" type="password" placeholder="••••••••"></div>
+      <button class="submitBtn" style="width:100%;border-radius:15px;margin-top:6px" id="submitBtn" onclick="submitAuth()">دخول</button>
+      <button class="backBtn" onclick="showHome()">رجوع</button>
+    </div>
+  </section>
+</main>
+
+<main id="ownerPage" class="page">
+  <section class="authWrap">
+    <div class="authInfo"><h2>لوحة تحكم المالك</h2><p>كل الصلاحيات مفعّلة لإدارة الأقسام والتوليد والملفات.</p></div>
+    <div class="authCard">
+      <div class="formTitle">FRANCO Admin</div><div class="formSub">افتح المصمم الشامل المتخصص.</div>
+      <div class="nav"><div class="active">أقسام متخصصة</div><div class="active">توليد صورة أو ملف</div><div class="active">قياسات يدوية لكل قسم</div><div class="active">إدارة Google AI Studio API</div></div>
+      <button class="submitBtn" style="width:100%;border-radius:15px" onclick="showStudio()">فتح المصمم الشامل</button>
+      <button class="backBtn" onclick="showPricingFromOwner()">صفحة الأسعار</button>
+      <button class="backBtn" onclick="logoutOwner()">تسجيل الخروج</button>
+    </div>
+  </section>
+</main>
+
+<main id="studioPage" class="page">
+  <section class="studioWrap">
+    <aside class="panel">
+      <span class="ownerTag">FRANCO Specialized Studio</span>
+      <h2>الأقسام</h2>
+      <p>كل قسم له اختيارات خاصة بمجاله فقط، بدون اختيارات عامة مكررة.</p>
+      <div id="categoryList" class="categoryGrid"></div>
+      <button class="backBtn" onclick="showPricingFromStudio()">صفحة الأسعار</button>
+      <button class="backBtn" onclick="backToOwner()">رجوع للمالك</button>
+    </aside>
+
+    <section class="panel">
+      <h2 id="designTitle">تصميم بوث</h2>
+      <p id="designDesc">مولد متخصص حسب القسم.</p>
+
+      <label style="display:block;color:#ddd;margin-top:14px">اكتب طلبك</label>
+      <textarea id="designIdea" class="promptArea"></textarea>
+
+      <label style="display:block;color:#ddd;margin-top:14px">بيانات إضافية / نصوص مطلوبة</label>
+      <textarea id="extraDetails" class="promptArea" style="min-height:105px"></textarea>
+
+      <div class="outputMode">
+        <button id="imageModeBtn" class="modeBtn active" onclick="setOutputMode('image')">توليد صورة</button>
+        <button id="fileModeBtn" class="modeBtn" onclick="setOutputMode('file')">توليد ملف</button>
+      </div>
+
+      <div class="optionField" style="margin-top:16px">
+        <label>اختيار الموديل</label>
+        <select id="modelSelect">
+          <option>ChatGPT Image</option>
+          <option>Nano Banana</option>
+        </select>
+      </div>
+
+      <div class="optionField" style="margin-top:16px">
+        <label>المقاس اليدوي</label>
+        <div id="customSizeBox" class="customSizeBox active">
+          <input id="manualW" type="number" placeholder="العرض">
+          <input id="manualH" type="number" placeholder="الارتفاع">
+          <select id="manualUnit"><option>سم</option><option>متر</option><option>بكسل</option><option>إنش</option></select>
+        </div>
+      </div>
+
+      <div id="specialOptions" class="optionsGrid"></div>
+
+      <div class="actions">
+        <button class="submitBtn" onclick="generateWithChatGPTImage()">توليد الصورة</button>
+        <button class="backBtn" onclick="generateResult()">معاينة محلية</button>
+        <button class="backBtn" onclick="openDownloadPanel()">Download</button>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <h2>الناتج النهائي</h2>
+      <div class="metaGrid">
+        <div class="meta"><small>القسم</small><b id="metaCat">Booth</b></div>
+        <div class="meta"><small>المقاس</small><b id="metaSize">6x3 متر</b></div>
+        <div class="meta"><small>الموديل</small><b id="metaModel">ChatGPT Image</b></div>
+        <div class="meta"><small>الناتج</small><b id="metaOutput">صورة</b></div>
+      </div>
+      <div id="generatedPreview" class="generatedPreview active">
+        <div class="generatedCanvas">
+          <div class="designMock" id="mockBox">
+            <h3 id="mockTitle">صورة التصميم</h3>
+            <p id="mockText">اضغط توليد النتيجة لإنشاء معاينة.</p>
+            <img id="generatedImage" alt="Generated design" style="display:none;width:100%;border-radius:18px;margin-top:14px;border:1px solid #302819">
+          </div>
+        </div>
+      </div>
+      <div id="fileMock" class="fileMock"><h3>ملف جاهز حسب طلبك</h3><ul id="fileList"></ul></div>
+      <div id="promptOutput" class="resultBox" style="margin-top:16px;display:none"></div>
+    </aside>
+  </section>
+</main>
+
+
+<main id="pricingPage" class="page">
+  <section class="pricingWrap">
+    <div class="pricingHeader">
+      <div>
+        <span class="ownerTag">FRANCO Pricing</span>
+        <h2>خطط الأسعار</h2>
+        <p>اختر الباقة المناسبة لاستخدام FRANCO Design Studio. العملة: الريال العُماني.</p>
+      </div>
+      <button class="backBtn" style="width:auto;min-width:160px" onclick="backFromPricing()">رجوع</button>
+    </div>
+
+    <div class="pricingGrid">
+      <div class="priceCard">
+        <div class="planName">Free</div>
+        <div class="planPoints">50 نقطة للتجربة</div>
+        <div class="priceLine">
+          <div class="currentPrice">0</div>
+          <div class="currency">ريال عُماني</div>
+        </div>
+        <ul class="features">
+          <li>50 نقطة مجانية للتجربة.</li>
+          <li>غير قابلة للتجديد.</li>
+          <li>تجربة الأقسام الأساسية.</li>
+          <li>توليد معاينات محدودة.</li>
+          <li>مناسبة لاختبار جودة النتائج.</li>
+        </ul>
+        <button class="chooseBtn">ابدأ مجانًا</button>
+      </div>
+
+      <div class="priceCard">
+        <div class="saveBadge">بدلًا من 10 ريال</div>
+        <div class="planName">Start</div>
+        <div class="planPoints">300 نقطة شهريًا</div>
+        <div class="priceLine">
+          <div class="currentPrice">5</div>
+          <div class="currency">ريال عُماني / شهر</div>
+          <div class="oldPrice">10 ريال</div>
+        </div>
+        <ul class="features">
+          <li>300 نقطة تتجدد شهريًا.</li>
+          <li>مناسبة للأفراد والبدايات.</li>
+          <li>توليد صور وتصاميم أساسية.</li>
+          <li>تحميل ملفات مواصفات PDF.</li>
+          <li>استخدام كل أقسام التصميم.</li>
+        </ul>
+        <button class="chooseBtn">اختيار Start</button>
+      </div>
+
+      <div class="priceCard featured">
+        <div class="saveBadge">بدلًا من 15 ريال</div>
+        <div class="planName">Pro</div>
+        <div class="planPoints">600 نقطة شهريًا</div>
+        <div class="priceLine">
+          <div class="currentPrice">8</div>
+          <div class="currency">ريال عُماني / شهر</div>
+          <div class="oldPrice">15 ريال</div>
+        </div>
+        <ul class="features">
+          <li>600 نقطة تتجدد شهريًا.</li>
+          <li>أفضل اختيار للمصممين.</li>
+          <li>توليد أكبر للصور والملفات.</li>
+          <li>مناسب لأعمال السوشيال والطباعة.</li>
+          <li>دعم أقسام: بنر، بروشور، كروت، ستيكر.</li>
+        </ul>
+        <button class="chooseBtn">اختيار Pro</button>
+      </div>
+
+      <div class="priceCard">
+        <div class="saveBadge">بدلًا من 25 ريال</div>
+        <div class="planName">Ultra</div>
+        <div class="planPoints">1200 نقطة شهريًا</div>
+        <div class="priceLine">
+          <div class="currentPrice">15</div>
+          <div class="currency">ريال عُماني / شهر</div>
+          <div class="oldPrice">25 ريال</div>
+        </div>
+        <ul class="features">
+          <li>1200 نقطة تتجدد شهريًا.</li>
+          <li>مناسبة لشركات الدعاية الصغيرة.</li>
+          <li>توليد بوثات وتصاميم متعددة.</li>
+          <li>تحميل ملفات PDF ومواصفات إنتاج.</li>
+          <li>مناسبة للاستخدام اليومي المتوسط.</li>
+        </ul>
+        <button class="chooseBtn">اختيار Ultra</button>
+      </div>
+
+      <div class="priceCard">
+        <div class="saveBadge">بدلًا من 35 ريال</div>
+        <div class="planName">Max</div>
+        <div class="planPoints">2400 نقطة شهريًا</div>
+        <div class="priceLine">
+          <div class="currentPrice">28</div>
+          <div class="currency">ريال عُماني / شهر</div>
+          <div class="oldPrice">35 ريال</div>
+        </div>
+        <ul class="features">
+          <li>2400 نقطة تتجدد شهريًا.</li>
+          <li>مناسبة للاستوديوهات والفرق.</li>
+          <li>استخدام مكثف لكل الأقسام.</li>
+          <li>تصميم بوثات، كتالوجات، برزنتيشن وPackaging.</li>
+          <li>مرونة أكبر في التوليد والتحميل.</li>
+        </ul>
+        <button class="chooseBtn">اختيار Max</button>
+      </div>
+
+      <div class="priceCard featured">
+        <div class="saveBadge">بدلًا من 80 ريال</div>
+        <div class="planName">Business</div>
+        <div class="planPoints">5000 نقطة شهريًا</div>
+        <div class="priceLine">
+          <div class="currentPrice">50</div>
+          <div class="currency">ريال عُماني / شهر</div>
+          <div class="oldPrice">80 ريال</div>
+        </div>
+        <ul class="features">
+          <li>5000 نقطة تتجدد شهريًا.</li>
+          <li>مناسبة للشركات وفرق التسويق.</li>
+          <li>أعلى قدرة توليد شهرية.</li>
+          <li>مناسبة للمشاريع الكبيرة والمتكررة.</li>
+          <li>إدارة تصاميم متعددة للعملاء.</li>
+        </ul>
+        <button class="chooseBtn">اختيار Business</button>
+      </div>
+    </div>
+
+    <div class="priceNote">
+      ملاحظة: النقاط تُستخدم في توليد الصور أو الملفات حسب نوع التصميم والموديل المختار. الباقة المجانية للتجربة مرة واحدة وغير قابلة للتجديد.
+    </div>
+  </section>
+</main>
+
+<div id="downloadPanel" class="downloadPanel">
+  <div class="downloadBox">
+    <h2>تحميل الملفات</h2>
+    <p>اختر نوع التحميل المناسب للقسم الحالي.</p>
+    <div class="downloadChoices">
+      <button class="downloadChoice" onclick="downloadSummaryImage()"><b>تحميل صورة</b><span>الصورة الناتجة/المعاينة كـ PNG.</span></button>
+      <button class="downloadChoice" onclick="downloadSpecPDF()"><b>تحميل PDF</b><span>ملف مواصفات متخصص حسب القسم.</span></button>
+    </div>
+    <button class="backBtn" onclick="closeDownloadPanel()">إغلاق</button>
+  </div>
+</div>
+
+<script>
+const OWNER_EMAIL="mohamedalifranco@gmail.com", OWNER_PASSWORD="Franco";
+let currentMode="login", currentCategoryKey="booth", outputMode="image";
+
+const categories={
+booth:{name:"تصميم بوث",desc:"قسم متخصص في بوثات المعارض: الجدران، السقف، الإضاءة، الشاشات، الكاونتر، حركة الزوار.",defaultSize:["600","300","سم"],idea:"أريد تصميم بوث معرض احترافي فاخر.",extra:"اسم البراند:\\nالنشاط:\\nالشعار المطلوب:\\nأماكن الشاشات:\\nملاحظات التنفيذ:",options:[
+["نوع البوث",["مفتوح من جهة واحدة","Corner مفتوح من جهتين","Island مفتوح من كل الجهات","Double Deck"]],
+["نوع الجدران",["جدار خلفي مضيء","Lightbox wall","ألواح خشبية","فوركس + بنر","Acrylic panels"]],
+["السقف",["إطار LED معلق","Hanging ring","سقف مفتوح","خطوط إضاءة مخفية","سقف قماش مشدود"]],
+["الإضاءة",["Warm hidden LED","Spotlights","White clean lighting","Mixed warm and white"]],
+["الشاشات",["شاشة خلفية","LED Wall","شاشة تفاعلية طولية","شاشتان فلات","بدون شاشات"]],
+["الأرضية",["Raised floor + carpet","PVC","باركيه","موكيت رمادي","حواف LED"]],
+["الكاونتر",["كاونتر أمامي","كاونتر منحني","كاونتر جانبي","Product display counter"]],
+["الجلسات",["جلسة VIP","طاولة اجتماعات","Lounge seating","بدون جلسات"]],
+["الخامات",["خشب + أكريلك + LED","MDF + فوركس","زجاج + معدن","قماش + خشب"]],
+["مستوى الفخامة",["Ultra Luxury","Luxury","Premium","Economic"]]]},
+
+businessCard:{name:"تصميم بيزنس كارد",desc:"قسم متخصص في كروت الأعمال: وجه/وجهين، تشطيب، QR، بيانات تواصل، طباعة.",defaultSize:["9","5","سم"],idea:"أريد تصميم بيزنس كارد احترافي.",extra:"الاسم:\\nالمسمى الوظيفي:\\nالهاتف:\\nالإيميل:\\nالعنوان:\\nالسوشيال:",options:[
+["وجه الكارت",["وجه واحد","وجهين"]],
+["اتجاه الكارت",["أفقي","رأسي"]],
+["نوع الهوية",["Luxury","Minimal","Corporate","Bold Creative"]],
+["التشطيب",["Matte Lamination","Glossy Lamination","Spot UV","Gold Foil","Emboss/Deboss"]],
+["الورق",["350gsm","400gsm","Textured paper","Black card","Kraft paper"]],
+["العناصر",["Logo + Contact","QR Code","Social icons","Map icon","Photo"]],
+["حواف الكارت",["حواف عادية","حواف دائرية","Die cut shape"]],
+["نظام الألوان",["لونين فقط","هوية كاملة","أسود وذهبي","أبيض وأسود"]]]},
+
+banner:{name:"تصميم بنر",desc:"قسم متخصص في البنرات: خامة، تركيب، وضوح من مسافة، عنوان، Call to Action.",defaultSize:["300","100","سم"],idea:"أريد تصميم بنر إعلاني واضح وجذاب.",extra:"العنوان الرئيسي:\\nالعرض:\\nرقم التواصل:\\nالمكان:\\nCall to Action:",options:[
+["نوع البنر",["بنر خارجي","بنر داخلي","رول أب","واجهة محل","بنر سوشيال"]],
+["الخامة",["Flex","Vinyl","Mesh banner","Fabric banner","PVC"]],
+["طريقة التركيب",["حلقات معدنية","جيب ماسورة","لاصق","إطار معدني","بدون"]],
+["مسافة الرؤية",["قريبة","متوسطة","بعيدة"]],
+["نمط العنوان",["عنوان كبير جدًا","عنوان + عرض","عنوان + صورة منتج","Minimal headline"]],
+["الصور",["صورة منتج","صورة أشخاص","بدون صور","خلفية مجردة"]],
+["CTA",["اتصل الآن","اطلب الآن","زر واتساب","زيارة الفرع","عرض خاص"]],
+["التشطيب",["قص عادي","لحام أطراف","تدعيم حواف","Ready to install"]]]},
+
+sticker:{name:"تصميم ستيكر",desc:"قسم متخصص في الملصقات: قص، شكل، خامة، بيانات منتج، باركود.",defaultSize:["7","7","سم"],idea:"أريد تصميم ستيكر احترافي للمنتج.",extra:"اسم المنتج:\\nالوصف:\\nالباركود/QR:\\nملاحظات القص:",options:[
+["شكل الاستيكر",["دائري","مربع","مستطيل","Die Cut","Oval"]],
+["الخامة",["Vinyl","Transparent sticker","Paper sticker","Waterproof","Matte"]],
+["نوع القص",["قص عادي","Die Cut","Kiss Cut","Sheet stickers"]],
+["الاستخدام",["منتج غذائي","Packaging","Label bottle","Promo sticker"]],
+["المحتوى",["Logo only","Product name","Ingredients","Barcode + QR"]],
+["التشطيب",["Matte","Glossy","UV resistant","Lamination"]],
+["الحواف",["حافة بيضاء","بدون حافة","حافة ذهبية","حافة ملونة"]]]},
+
+brochure:{name:"تصميم بروشور",desc:"قسم متخصص في البروشورات: طي، صفحات، توزيع محتوى، خدمات، صور.",defaultSize:["21","29.7","سم"],idea:"أريد تصميم بروشور تعريفي احترافي.",extra:"عنوان البروشور:\\nنبذة عن الشركة:\\nالخدمات:\\nبيانات التواصل:",options:[
+["نوع الطي",["Tri Fold","Bi Fold","Z Fold","بدون طي"]],
+["عدد الصفحات/الأوجه",["وجهين","4 أوجه","6 أوجه","8 صفحات"]],
+["نوع المحتوى",["خدمات","منتجات","Company profile","عرض تسويقي"]],
+["الصور",["صور منتجات","صور فريق","أيقونات فقط","بدون صور"]],
+["ترتيب المحتوى",["Cover + About + Services + Contact","Products grid","Storytelling"]],
+["الورق",["150gsm","200gsm","250gsm","كوشيه مطفي"]],
+["التشطيب",["Matte","Glossy","Creasing","Ready to print"]]]},
+
+fabric:{name:"تصميم قماش",desc:"قسم متخصص في تصميم القماش: باترن، تكرار، ألوان، طباعة، تيشيرتات أو خلفيات.",defaultSize:["100","100","سم"],idea:"أريد تصميم قماش احترافي للطباعة.",extra:"نوع الاستخدام:\\nالألوان:\\nاللوجو/النمط:\\nملاحظات التكرار:",options:[
+["نوع التصميم",["Pattern متكرر","تصميم تيشيرت","Backdrop fabric","Scarf pattern","Uniform fabric"]],
+["طريقة التكرار",["Seamless repeat","Half drop","Mirror repeat","Random pattern"]],
+["نوع القماش",["Cotton","Polyester","Canvas","Satin","Jersey"]],
+["طريقة الطباعة",["Sublimation","DTF","Screen print","Digital textile print"]],
+["كثافة العناصر",["خفيف","متوسط","مزدحم"]],
+["مقياس الباترن",["صغير","متوسط","كبير"]],
+["الألوان",["ألوان هوية","Monochrome","Bright colors","Luxury dark"]]]},
+
+flag:{name:"تصميم علم",desc:"قسم متخصص في الأعلام: أعلام مكتبية، خارجية، Beach Flag، اتجاه الرياح، وضوح.",defaultSize:["150","100","سم"],idea:"أريد تصميم علم احترافي يحمل هوية الشركة.",extra:"اسم الشركة:\\nالشعار:\\nالألوان:\\nمكان الاستخدام:",options:[
+["نوع العلم",["علم خارجي","علم مكتبي","Beach Flag","Table Flag","Event Flag"]],
+["الشكل",["مستطيل","Teardrop","Feather","عمودي"]],
+["الوجه",["وجه واحد","وجهين"]],
+["مكان الاستخدام",["داخلي","خارجي","فعالية","مكتب"]],
+["طريقة التثبيت",["ماسورة جانبية","قاعدة أرضية","قاعدة مكتبية","حبل"]],
+["الخامة",["Polyester","Satin","Mesh fabric","Flag fabric"]],
+["وضوح الشعار",["شعار كبير","شعار + نص","Pattern logo"]]]},
+
+notebook:{name:"تصميم نوت بوك",desc:"قسم متخصص في النوت بوك: غلاف، صفحات داخلية، هوية، ورق، تشطيب.",defaultSize:["14","21","سم"],idea:"أريد تصميم نوت بوك فخم يحمل هوية الشركة.",extra:"اسم الشركة:\\nنوع النوت بوك:\\nالنص على الغلاف:\\nملاحظات الصفحات الداخلية:",options:[
+["نوع التصميم",["غلاف فقط","غلاف + صفحات داخلية","Corporate notebook","Luxury notebook"]],
+["نوع الغلاف",["Hard cover","Soft cover","Leather texture","Kraft cover"]],
+["التجليد",["Spiral","Perfect binding","Saddle stitch","Hard binding"]],
+["الصفحات الداخلية",["مسطرة","نقطية","سادة","Planner pages"]],
+["الورق الداخلي",["80gsm","100gsm","Ivory paper","Recycled paper"]],
+["التشطيب",["Foil logo","Emboss logo","Spot UV","Matte lamination"]],
+["الإضافات",["Bookmark","Elastic band","Pen holder","Pocket"]]]},
+
+giftBox:{name:"تصميم بوكس هدايا",desc:"قسم متخصص في Packaging وعلب الهدايا: ديلاين، خامة، فتح، تشطيب.",defaultSize:["30","20","10 سم"],idea:"أريد تصميم بوكس هدايا فاخر.",extra:"اسم البراند:\\nنوع المنتج داخل البوكس:\\nالنصوص المطلوبة:\\nملاحظات الفتح والإغلاق:",options:[
+["نوع البوكس",["Magnetic box","Sliding drawer box","Rigid box","Folding carton","Sleeve box"]],
+["الخامة",["كرتون مقوى","كرافت","ورق فاخر","هارد بورد"]],
+["طريقة الفتح",["غطاء علوي","درج سحب","مغناطيس","Sleeve"]],
+["التشطيب",["Gold Foil","Spot UV","Emboss","Matte lamination"]],
+["الداخل",["فوم داخلي","كرتون مقسم","ستان","بدون تقسيم"]],
+["الطباعة",["خارجية فقط","داخلية وخارجية","Pattern كامل"]],
+["مستوى الفخامة",["Ultra luxury","Premium","Minimal","Eco friendly"]]]},
+
+catalog:{name:"تصميم كتالوج",desc:"قسم متخصص في الكتالوجات: صفحات، منتجات، فهارس، جداول، غلاف.",defaultSize:["21","29.7","سم"],idea:"أريد تصميم كتالوج احترافي للمنتجات أو الخدمات.",extra:"اسم الكتالوج:\\nعدد الصفحات المتوقع:\\nأقسام المنتجات:\\nبيانات التواصل:",options:[
+["نوع الكتالوج",["Product catalog","Service catalog","Company profile","Luxury portfolio"]],
+["عدد الصفحات",["8 صفحات","12 صفحة","24 صفحة","48 صفحة","حسب المحتوى"]],
+["نظام العرض",["Grid products","صفحة لكل منتج","Storytelling","Technical specs"]],
+["الغلاف",["Luxury cover","Minimal cover","Image cover","Typographic cover"]],
+["الفهرس",["مع فهرس","بدون فهرس","تصنيفات ملونة"]],
+["الجداول",["مواصفات فنية","أسعار","مقاسات","بدون جداول"]],
+["الإخراج",["Print PDF","Digital PDF","Both print and digital"]]]},
+
+presentation:{name:"تصميم برزنتيشن",desc:"قسم متخصص في العروض التقديمية: شرائح، قصة، Pitch Deck، محتوى، انتقالات.",defaultSize:["1920","1080","بكسل"],idea:"أريد تصميم برزنتيشن احترافي منظم.",extra:"عنوان العرض:\\nعدد الشرائح:\\nالجمهور المستهدف:\\nالنقاط الأساسية:",options:[
+["نوع العرض",["Company Presentation","Pitch Deck","Sales Presentation","Portfolio","Training deck"]],
+["عدد الشرائح",["5 شرائح","10 شرائح","15 شريحة","20 شريحة","حسب المحتوى"]],
+["نمط السرد",["Problem/Solution","Company story","Sales flow","Portfolio showcase"]],
+["الشرائح المطلوبة",["Cover + About + Services + Contact","Market + Solution + Team","Products + Pricing"]],
+["الرسوم البيانية",["Charts","Infographics","Icons only","No charts"]],
+["الانتقالات",["Static PDF","Animated PowerPoint","Clean transitions"]],
+["الإخراج",["PPTX","PDF","Google Slides style"]]]}
+};
+
+function showAuth(){homePage.classList.remove("active");authPage.classList.add("active")}
+function showHome(){authPage.classList.remove("active");homePage.classList.add("active")}
+function switchMode(mode){currentMode=mode;const isLogin=mode==="login";loginTab.classList.toggle("active",isLogin);signupTab.classList.toggle("active",!isLogin);nameField.classList.toggle("hidden",isLogin);formTitle.innerText=isLogin?"تسجيل الدخول":"إنشاء حساب";formSub.innerText=isLogin?"ادخل بياناتك أو استخدم حساب Google.":"أنشئ حساب جديد للبدء.";submitBtn.innerText=isLogin?"دخول":"إنشاء حساب"}
+function submitAuth(){const email=emailInput.value.trim().toLowerCase(), pass=passwordInput.value;if(currentMode==="login"&&email===OWNER_EMAIL&&pass===OWNER_PASSWORD){authPage.classList.remove("active");ownerPage.classList.add("active");return}alert(currentMode==="login"?"بيانات الدخول غير صحيحة أو الحساب ليس مالك.":"تم تجهيز إنشاء الحساب. الربط الحقيقي يحتاج Firebase Auth.")}
+function googleLogin(){alert("عند الربط الحقيقي: إذا كان حساب Google هو mohamedalifranco@gmail.com سيتم منحه صلاحيات المالك.")}
+function logoutOwner(){ownerPage.classList.remove("active");homePage.classList.add("active")}
+function showStudio(){ownerPage.classList.remove("active");studioPage.classList.add("active");renderCategories();selectCategory(currentCategoryKey)}
+function backToOwner(){studioPage.classList.remove("active");ownerPage.classList.add("active")}
+function renderCategories(){categoryList.innerHTML=Object.entries(categories).map(([k,c])=>`<button class="catBtn ${k===currentCategoryKey?'active':''}" onclick="selectCategory('${k}')">${c.name}</button>`).join("")}
+function selectCategory(key){
+ currentCategoryKey=key;const c=categories[key];renderCategories();
+ designTitle.innerText=c.name;designDesc.innerText=c.desc;designIdea.value=c.idea;extraDetails.value=c.extra;
+ manualW.value=c.defaultSize[0];manualH.value=c.defaultSize[1];manualUnit.value=c.defaultSize[2]||"سم";
+ specialOptions.innerHTML=c.options.map((op,i)=>`<div class="optionField"><label>${i+1}. ${op[0]}</label><select id="sp${i}">${op[1].map(v=>`<option>${v}</option>`).join("")}</select></div>`).join("");
+ generateResult();
+}
+function setOutputMode(mode){outputMode=mode;imageModeBtn.classList.toggle("active",mode==="image");fileModeBtn.classList.toggle("active",mode==="file");generatedPreview.classList.toggle("active",mode==="image");fileMock.classList.toggle("active",mode==="file");generateResult()}
+function getDesignSize(){return `${manualW.value||"العرض"} x ${manualH.value||"الارتفاع"} ${manualUnit.value||"سم"}`}
+function collectOptions(){const c=categories[currentCategoryKey];return c.options.map((op,i)=>`${op[0]}: ${document.getElementById("sp"+i)?.value||""}`).join("\n")}
+function generateResult(){
+ const c=categories[currentCategoryKey];metaCat.innerText=c.name;metaSize.innerText=getDesignSize();metaModel.innerText=modelSelect.value;metaOutput.innerText=outputMode==="image"?"صورة":"ملف";
+ const optionsText=collectOptions();
+ promptOutput.innerText=`Specialized professional AI design request.
+
+Category:
+${c.name}
+
+Specialized field description:
+${c.desc}
+
+Selected AI model:
+${modelSelect.value}
+
+Required output:
+${outputMode==="image"?"Generate a final visual image design":"Generate a production-ready file/specification"}
+
+Manual size:
+${getDesignSize()}
+
+Main request:
+${designIdea.value}
+
+Client text/data:
+${extraDetails.value}
+
+Specialized options:
+${optionsText}
+
+Execution direction:
+Act as a specialist designer only in this exact category. Do not use generic design assumptions.
+Follow industry standards for this product type, correct proportions, print-ready composition, clear hierarchy, accurate spacing, professional finishing, and real production constraints.`;
+ if(outputMode==="image"){
+   mockTitle.innerText=c.name;
+   mockText.innerText=`سيتم توليد صورة متخصصة في ${c.name} فقط، بمقاس ${getDesignSize()}، ووفق اختيارات هذا المجال: ${optionsText.split("\\n").slice(0,3).join(" / ")}.`;
+ }else{
+   fileList.innerHTML=[`القسم: ${c.name}`,`المقاس: ${getDesignSize()}`,`الموديل: ${modelSelect.value}`,`نوع الملف: مواصفات إنتاج متخصصة`,...optionsText.split("\n").slice(0,7)].map(x=>`<li>${x}</li>`).join("");
+ }
+}
+function copyDescription(){navigator.clipboard.writeText(promptOutput.innerText);alert("تم نسخ الوصف")}
+function openDownloadPanel(){generateResult();downloadPanel.classList.add("active")}
+function closeDownloadPanel(){downloadPanel.classList.remove("active")}
+
+function downloadSummaryImage(){
+ const canvas=document.createElement("canvas");canvas.width=1400;canvas.height=900;const ctx=canvas.getContext("2d");
+ ctx.fillStyle="#070707";ctx.fillRect(0,0,1400,900);ctx.fillStyle="#111";roundRect(ctx,40,40,1320,820,35,true,false);ctx.strokeStyle="#d6ad45";ctx.lineWidth=4;roundRect(ctx,40,40,1320,820,35,false,true);
+ ctx.fillStyle="#f6d37d";ctx.font="bold 54px Cairo, Arial";ctx.textAlign="left";ctx.fillText("FRANCO Design Studio",80,120);
+ ctx.fillStyle="#fff";ctx.font="bold 34px Cairo, Arial";ctx.fillText(categories[currentCategoryKey].name,80,180);
+ ctx.fillStyle="#d6ad45";ctx.fillRect(80,210,1240,3);
+ ctx.fillStyle="#fff";ctx.font="26px Cairo, Arial";let y=270;["المقاس: "+getDesignSize(),"الناتج: "+(outputMode==="image"?"صورة":"ملف"),"الموديل: "+modelSelect.value,...collectOptions().split("\n").slice(0,7)].forEach(l=>{ctx.fillText(l,80,y);y+=46});
+ ctx.fillStyle="#b8b8b8";ctx.font="24px Cairo, Arial";wrapCanvasText(ctx,designIdea.value,80,y+20,1220,38);wrapCanvasText(ctx,"بيانات: "+extraDetails.value,80,y+120,1220,38);
+ const a=document.createElement("a");a.download="franco_specialized_design.png";a.href=canvas.toDataURL("image/png");a.click();
+}
+function downloadSpecPDF(){
+ const canvas=document.createElement("canvas");canvas.width=1600;canvas.height=1500;const ctx=canvas.getContext("2d");
+ ctx.fillStyle="#fff";ctx.fillRect(0,0,1600,1500);ctx.fillStyle="#111";ctx.font="bold 46px Cairo, Arial";ctx.textAlign="left";ctx.fillText("FRANCO Specialized Design Specs",70,80);
+ ctx.fillStyle="#d6ad45";ctx.font="bold 34px Cairo, Arial";ctx.fillText(categories[currentCategoryKey].name,70,130);
+ ctx.fillStyle="#555";ctx.font="23px Cairo, Arial";ctx.fillText("Size: "+getDesignSize()+" | Model: "+modelSelect.value+" | Output: "+(outputMode==="image"?"Image":"File"),70,170);
+ let rows=[["Category",categories[currentCategoryKey].name],["Size",getDesignSize()],["AI Model",modelSelect.value],["Main request",designIdea.value],["Client data",extraDetails.value],...collectOptions().split("\n").map(x=>{let p=x.split(": ");return[p[0],p.slice(1).join(": ")]})];
+ let y=240;ctx.font="bold 24px Cairo, Arial";ctx.fillStyle="#111";ctx.fillText("Specialized Production Table",70,y);y+=35;ctx.font="18px Cairo, Arial";
+ rows.slice(0,18).forEach((r,i)=>{ctx.fillStyle=i%2?"#eee":"#f8f8f8";ctx.fillRect(70,y,1460,48);ctx.strokeStyle="#ccc";ctx.strokeRect(70,y,1460,48);ctx.fillStyle="#111";ctx.fillText(String(r[0]).slice(0,28),95,y+31);ctx.fillText(String(r[1]).slice(0,90),430,y+31);y+=48});
+ y+=35;ctx.font="bold 24px Cairo, Arial";ctx.fillText("Internal AI Request",70,y);y+=35;ctx.font="18px Cairo, Arial";wrapCanvasText(ctx,promptOutput.innerText,70,y,1450,30);
+ const imgData=canvas.toDataURL("image/jpeg",.95),pdf=createSimplePDF(imgData,1600,1500),blob=new Blob([pdf],{type:"application/pdf"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="franco_specialized_design_specs.pdf";a.click();URL.revokeObjectURL(url);
+}
+function createSimplePDF(jpegDataUrl,w,h){const jpg=atob(jpegDataUrl.split(",")[1]);const imgBytes=new Uint8Array(jpg.length);for(let i=0;i<jpg.length;i++)imgBytes[i]=jpg.charCodeAt(i);const encoder=new TextEncoder();let parts=[],offsets=[],pos=0;function add(s){let b=typeof s==="string"?encoder.encode(s):s;parts.push(b);pos+=b.length}function obj(n,c){offsets[n]=pos;add(n+" 0 obj\n");add(c);add("\nendobj\n")}add("%PDF-1.4\n");obj(1,"<< /Type /Catalog /Pages 2 0 R >>");obj(2,"<< /Type /Pages /Kids [3 0 R] /Count 1 >>");obj(3,`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${w} ${h}] /Resources << /XObject << /Im1 4 0 R >> >> /Contents 5 0 R >>`);offsets[4]=pos;add("4 0 obj\n");add(`<< /Type /XObject /Subtype /Image /Width ${w} /Height ${h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${imgBytes.length} >>\nstream\n`);add(imgBytes);add("\nendstream\nendobj\n");const stream=`q\n${w} 0 0 ${h} 0 0 cm\n/Im1 Do\nQ\n`;obj(5,`<< /Length ${stream.length} >>\nstream\n${stream}endstream`);const xref=pos;add("xref\n0 6\n0000000000 65535 f \n");for(let i=1;i<=5;i++)add(String(offsets[i]).padStart(10,"0")+" 00000 n \n");add(`trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`);const total=parts.reduce((s,p)=>s+p.length,0),out=new Uint8Array(total);let o=0;parts.forEach(p=>{out.set(p,o);o+=p.length});return out}
+function roundRect(ctx,x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();if(fill)ctx.fill();if(stroke)ctx.stroke()}
+function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight){const words=String(text).split(" ");let line="";for(let n=0;n<words.length;n++){const test=line+words[n]+" ";if(ctx.measureText(test).width>maxWidth&&n>0){ctx.fillText(line,x,y);line=words[n]+" ";y+=lineHeight}else line=test}ctx.fillText(line,x,y)}
+document.addEventListener("change",e=>{if((e.target.id&&e.target.id.startsWith("sp"))||["manualUnit","modelSelect"].includes(e.target.id))generateResult()});
+document.addEventListener("input",e=>{if(["designIdea","extraDetails","manualW","manualH"].includes(e.target.id))generateResult()});
+
+let pricingBackTarget = "owner";
+function showPricingFromOwner(){
+  pricingBackTarget = "owner";
+  ownerPage.classList.remove("active");
+  pricingPage.classList.add("active");
+}
+function showPricingFromStudio(){
+  pricingBackTarget = "studio";
+  studioPage.classList.remove("active");
+  pricingPage.classList.add("active");
+}
+function backFromPricing(){
+  pricingPage.classList.remove("active");
+  if(pricingBackTarget==="studio"){studioPage.classList.add("active");}
+  else{ownerPage.classList.add("active");}
+}
+
+
+async function generateWithChatGPTImage(){
+  generateResult();
+
+  if(outputMode !== "image"){
+    alert("اختر وضع توليد صورة أولًا.");
+    return;
+  }
+
+  if(modelSelect && modelSelect.value !== "ChatGPT Image"){
+    alert("التوليد الفعلي المربوط الآن هو ChatGPT Image. اختر ChatGPT Image من قائمة الموديل.");
+    return;
+  }
+
+  mockTitle.innerText = "جاري توليد الصورة...";
+  mockText.innerText = "يتم إرسال الطلب إلى OpenAI Image API عبر Backend آمن.";
+  generatedImage.style.display = "none";
+
+  try{
+    const res = await fetch("/api/generate-image", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        prompt: promptOutput.innerText,
+        size: "1024x1024",
+        quality: "high"
+      })
+    });
+
+    const data = await res.json();
+
+    if(!res.ok){
+      throw new Error(data.error || "فشل توليد الصورة");
+    }
+
+    generatedImage.src = data.image;
+    generatedImage.style.display = "block";
+    mockTitle.innerText = "تم توليد الصورة";
+    mockText.innerText = "يمكنك تحميل الصورة من الزر Download.";
+  }catch(err){
+    mockTitle.innerText = "تعذر التوليد";
+    mockText.innerText = "تأكد أنك رفعت المشروع على Vercel وأن OPENAI_API_KEY موجود في Environment Variables. الخطأ: " + err.message;
+  }
+}
+
+</script>
+</body>
+</html>
